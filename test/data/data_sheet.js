@@ -13,7 +13,7 @@ module.exports =
     {
         firstName: "Steve",
         lastName: "Works",
-        email: "wor@jammin.com",
+        email: "worn@jackz.com",
         Password: "9to5Hard",
         confirm: "9to5Hard",
         expectedUrl: "https://magento.softwaretestingboard.com/customer/account/"

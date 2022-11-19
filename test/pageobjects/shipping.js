@@ -1,6 +1,7 @@
 
 const Page = require('./page');
 
+
 class shippingInfo extends Page {
 
     get emailAddress() {
@@ -16,7 +17,7 @@ class shippingInfo extends Page {
         return $(`//input[@name='company']`)
     }
     get street() {
-        return $(`input[name='street[0]']`)
+        return $(`//input[@name='street[0]']`)
     }
     get city() {
         return $(`//input[@name='city']`)
@@ -31,7 +32,7 @@ class shippingInfo extends Page {
         return $(`//select[@name='country_id']`)
     }
     get phoneNumber() {
-        return $(`///input[@name='telephone']`)
+        return $(`//input[@name='telephone']`)
     }
     get method() {
         return $(`//input[@name='ko_unique_3']`)
@@ -42,16 +43,18 @@ class shippingInfo extends Page {
 
     async Login (emailAdd, passWord){
      await this.emailAddress.setValue(emailAdd);
+     await this.passwords.waitForDisplayed ();
      await this.passwords.setValue(passWord);
      await this.loginButton.click();
     }
      
     async createLabel (streetNum, City, State, zip, Country, Phone){
+        await this.company.waitForDisplayed();
         await this.street.setValue(streetNum);
         await this.city.setValue(City)
-        await this.state.setValue(State)
+        await this.state.selectByAttribute(`data-title`,State);
         await this.postalCode.setValue(zip)
-        await this.country.setValue(Country)
+        await this.country.selectByAttribute(`data-title`,Country);
         await this.phoneNumber.setValue(Phone)
         await this.method.click();
         await this.next.click();
